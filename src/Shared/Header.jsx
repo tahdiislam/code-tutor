@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../assets/code-tutor-logo.png"
 import { AuthContext } from '../Context/AuthProvider';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -99,12 +101,13 @@ export const Header = () => {
                         </>
                         : <>
                                 <li>
-                                    <div className="relative flex-shrink-0">
-                                        <span className="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
-                                        <img src={user.photoURL} alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700" />
-                                    </div>
+                                    <Tippy content={user.displayName}>
+                                        <div className="relative flex-shrink-0">
+                                            <span className="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
+                                            <img src={user.photoURL} alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700" />
+                                        </div>
+                                    </Tippy>
                                 </li>
-                                <li className='text-gray-200'>{user?.displayName}</li>
                         </>}
                         <li>
                             <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">

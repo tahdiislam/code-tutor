@@ -1,14 +1,17 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
 const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const Login = () => {
-    const { signInWithProvider, logInWithEmailAndPassword } = useContext(AuthContext)
+    const {user, signInWithProvider, logInWithEmailAndPassword } = useContext(AuthContext)
+    if(user && user.uid){
+        return <Navigate to="*"/>
+    }
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'

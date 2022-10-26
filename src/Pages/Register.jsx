@@ -1,14 +1,17 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
 const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const Register = () => {
-    const { signInWithProvider, signUpWithEmailAndPassword, updateUserProfile } = useContext(AuthContext)
+    const {user, signInWithProvider, signUpWithEmailAndPassword, updateUserProfile } = useContext(AuthContext)
+    if (user && user.uid) {
+        return <Navigate to="*" />
+    }
     // form submit handler 
     const handleFormSubmit = event => {
         event.preventDefault()
