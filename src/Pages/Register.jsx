@@ -1,5 +1,6 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
@@ -7,22 +8,34 @@ const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const Register = () => {
-    const { signInWithProvider } = useContext(AuthContext)
+    const { signInWithProvider, signUpWithEmailAndPassword } = useContext(AuthContext)
     // form submit handler 
     const handleFormSubmit = event => {
         event.preventDefault()
-        console.log("hello code tutor");
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, email, password);
+        
+        // sing up with email and passsword 
+        signUpWithEmailAndPassword(email, password)
+        .then(result => {
+            toast.success('Account created successfully.')
+        })
+        .catch(error => {
+            toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
+        })
     }
 
     // handle sing up with google 
     const handleGoogleSignUp = () => {
         signInWithProvider(googleProvider)
             .then(result => {
-                const user = result.user;
-                console.log(user);
+                toast.success("Account Created Successfully.")
             })
             .catch(error => {
-                console.error(error.message);
+                toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
             })
     }
 
@@ -30,10 +43,11 @@ const Register = () => {
     const handleGitHubSignUp = () => {
         signInWithProvider(githubProvider)
             .then(result => {
-                const user = result.user;
-                console.log(user);
+                toast.success("Account created successfully.")
             })
-            .catch(error => console.error(error.message))
+            .catch(error => {
+                toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
+            })
     }
     return (
         <div className='bg-gray-800 py-4'>
