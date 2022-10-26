@@ -88,6 +88,12 @@ export const Header = () => {
                             </li>
                         </>
                         : <>
+                                <li>
+                                    <div className="relative flex-shrink-0">
+                                        <span className="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
+                                        <img src={user.photoURL} alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700" />
+                                    </div>
+                                </li>
                                 <li className='text-gray-200'>{user?.displayName}</li>
                         </>}
                         <li>
