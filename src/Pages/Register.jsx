@@ -8,7 +8,7 @@ const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const Register = () => {
-    const { signInWithProvider, signUpWithEmailAndPassword } = useContext(AuthContext)
+    const { signInWithProvider, signUpWithEmailAndPassword, updateUserProfile } = useContext(AuthContext)
     // form submit handler 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -16,16 +16,25 @@ const Register = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password);
-        
+        const photoUrl = form.photoUrl.value;
+        const userDetails = { displayName: name, photoURL: photoUrl }
+        console.log(name, email, password, photoUrl);
+
         // sing up with email and passsword 
         signUpWithEmailAndPassword(email, password)
-        .then(result => {
-            toast.success('Account created successfully.')
+            .then(result => {
+                toast.success('Account created successfully.')
+                updateUserProfile(userDetails)
+                    .then(result => {
+                        // user profile updated 
+                    })
+                    .catch(error => {
+                        toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
+                    })
         })
-        .catch(error => {
-            toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
-        })
+            .catch(error => {
+                toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
+            })
     }
 
     // handle sing up with google 
@@ -57,6 +66,10 @@ const Register = () => {
                     <div className="space-y-1 text-sm">
                         <label htmlFor="name" className="block dark:text-gray-400">Name</label>
                         <input type="text" name="name" id="name" placeholder="name" className="w-full px-4 py-3 rounded-md dark:bg-gray-900 dark:text-gray-100 border" required />
+                    </div>
+                    <div className="space-y-1 text-sm">
+                        <label htmlFor="photoUrl" className="block dark:text-gray-400">Photo Url</label>
+                        <input type="text" name="photoUrl" id="photoUrl" placeholder="photoUrl" className="w-full px-4 py-3 rounded-md dark:bg-gray-900 dark:text-gray-100 border" required />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label htmlFor="email" className="block dark:text-gray-400">Email</label>
