@@ -45,6 +45,16 @@ export const Header = () => {
                         </li>
                         <li>
                             <Link
+                                to="/profile"
+                                aria-label="Our product"
+                                title="Our product"
+                                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                            >
+                                Profile
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
                                 to="/blog"
                                 aria-label="Product pricing"
                                 title="Product pricing"
