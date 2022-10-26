@@ -3,7 +3,16 @@ import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthProvider';
 
 const Profile = () => {
-    const {user} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {
+            // user sign out
+        })
+        .catch(error => {
+            console.error(error.message);
+        })
+    }
     return (
         <div className='py-4 bg-gray-800 '>
             <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 mx-auto">
@@ -36,7 +45,7 @@ const Profile = () => {
                         </a>
                     </div>
                     <div className='py-4'>
-                        <button type="button" className="px-8 py-3 font-semibold rounded dark:bg-green-500 dark:text-gray-300">Sign Out</button>
+                        <button onClick={handleLogOut} type="button" className="px-8 py-3 font-semibold rounded dark:bg-green-500 dark:text-gray-300">Sign Out</button>
                     </div>
                 </div>
             </div>
