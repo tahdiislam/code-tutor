@@ -6,7 +6,7 @@ import { AuthContext } from '../Context/AuthProvider';
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user } = useContext(AuthContext)
-    console.log(user.displayName);
+    // console.log(user.displayName);
     return (
         <div className="bg-gray-900">
             <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -65,7 +65,7 @@ export const Header = () => {
                         </li>
                     </ul>
                     <ul className="flex items-center hidden space-x-8 lg:flex">
-                        {!user.uid ? <>
+                        {!user?.uid ? <>
                             <li>
                                 <Link
                                     to="/login"
@@ -88,7 +88,7 @@ export const Header = () => {
                             </li>
                         </>
                         : <>
-                        <li className='text-gray-200'>{user.displayName}</li>
+                                <li className='text-gray-200'>{user?.displayName}</li>
                         </>}
                     </ul>
                     <div className="lg:hidden">
