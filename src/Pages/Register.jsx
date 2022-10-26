@@ -78,9 +78,6 @@ const Register = () => {
                     <div className="space-y-1 text-sm">
                         <label htmlFor="password" className="block dark:text-gray-400">Password</label>
                         <input type="password" name="password" id="password" placeholder="password" className="w-full px-4 py-3 rounded-md dark:bg-gray-900 dark:text-gray-100 border" required />
-                        <div className="flex justify-end text-xs dark:text-gray-400">
-                            <a rel="noopener noreferrer" href="#">Forgot Password?</a>
-                        </div>
                     </div>
                     <button type='submit' className="block w-full p-3 text-center rounded-sm dark:text-gray-300 dark:bg-indigo-400">Register</button>
                 </form>

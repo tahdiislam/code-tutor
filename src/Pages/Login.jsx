@@ -1,7 +1,7 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
 const googleProvider = new GoogleAuthProvider()
@@ -9,7 +9,10 @@ const githubProvider = new GithubAuthProvider()
 
 const Login = () => {
     const { signInWithProvider, logInWithEmailAndPassword } = useContext(AuthContext)
-    
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
+
     // handle log in with email and password
     const handleLogInWithEmailAndPassword = event => {
         event.preventDefault()
@@ -21,6 +24,7 @@ const Login = () => {
         logInWithEmailAndPassword(email, password)
         .then(result => {
             toast.success("Log in successfully.")
+            navigate(from, {replace: true})
         })
         .catch(error => {
             toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
@@ -32,6 +36,7 @@ const Login = () => {
         signInWithProvider(googleProvider)
             .then(result => {
                 toast.success("Account Created Successfully.")
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
@@ -43,6 +48,7 @@ const Login = () => {
         signInWithProvider(githubProvider)
             .then(result => {
                 toast.success("Account created successfully.")
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
@@ -83,7 +89,6 @@ const Login = () => {
                         <div className="space-y-2">
                             <div className="flex justify-between">
                                 <label htmlFor="password" className="text-sm">Password</label>
-                                <a rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-gray-400">Forgot password?</a>
                             </div>
                             <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-indigo-400" />
                         </div>

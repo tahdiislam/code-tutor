@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthProvider';
 
 const Profile = () => {
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut, setLoading } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
         .then(() => {
@@ -11,6 +11,9 @@ const Profile = () => {
         })
         .catch(error => {
             console.error(error.message);
+        })
+        .finally(() => {
+            setLoading(false)
         })
     }
     return (
