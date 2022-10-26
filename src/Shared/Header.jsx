@@ -5,7 +5,7 @@ import { AuthContext } from '../Context/AuthProvider';
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     console.log(user.displayName);
     return (
         <div className="bg-gray-900">
@@ -65,16 +65,31 @@ export const Header = () => {
                         </li>
                     </ul>
                     <ul className="flex items-center hidden space-x-8 lg:flex">
-                        <li>
-                            <Link
-                                to="/register"
-                                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                aria-label="Sign up"
-                                title="Sign up"
-                            >
-                                Register
-                            </Link>
-                        </li>
+                        {!user.uid ? <>
+                            <li>
+                                <Link
+                                    to="/login"
+                                    aria-label="Sign in"
+                                    title="Sign in"
+                                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                                >
+                                    Sign in
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/register"
+                                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                    aria-label="Sign up"
+                                    title="Sign up"
+                                >
+                                    Register
+                                </Link>
+                            </li>
+                        </>
+                        : <>
+                        <li className='text-gray-200'>{user.displayName}</li>
+                        </>}
                     </ul>
                     <div className="lg:hidden">
                         <button
