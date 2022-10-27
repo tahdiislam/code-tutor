@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/get-course/:id", element: <PrivateRoutes>
-                    <PurchaseCourse />
+                    <PurchaseCourse/>
                 </PrivateRoutes>, loader: async ({ params }) => {
                     return fetch(`https://code-tutor-server.vercel.app/course/${params.id}`)
                 }

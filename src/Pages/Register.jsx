@@ -8,10 +8,7 @@ const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const Register = () => {
-    const {user, signInWithProvider, signUpWithEmailAndPassword, updateUserProfile } = useContext(AuthContext)
-    if (user && user.uid) {
-        return <Navigate to="*" />
-    }
+    const { signInWithProvider, signUpWithEmailAndPassword, updateUserProfile } = useContext(AuthContext)
     // form submit handler 
     const handleFormSubmit = event => {
         event.preventDefault()
