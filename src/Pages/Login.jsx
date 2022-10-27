@@ -1,5 +1,6 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, Navigate, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
@@ -8,6 +9,7 @@ const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
 
 const Login = () => {
+    const [error, setError] = useState("")
     const {user, signInWithProvider, logInWithEmailAndPassword } = useContext(AuthContext)
     if(user && user.uid){
         return <Navigate to="*"/>
@@ -19,6 +21,7 @@ const Login = () => {
     // handle log in with email and password
     const handleLogInWithEmailAndPassword = event => {
         event.preventDefault()
+        setError('')
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -30,6 +33,8 @@ const Login = () => {
             navigate(from, {replace: true})
         })
         .catch(error => {
+            setError(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
+
             toast.error(error.message.split('Firebase:').join('').split(" (auth/").join(': ').split("-").join(" ").split(")").join(""))
         })
     }
@@ -38,7 +43,7 @@ const Login = () => {
     const handleGoogleSignUp = () => {
         signInWithProvider(googleProvider)
             .then(result => {
-                toast.success("Account Created Successfully.")
+                toast.success("Log in Successfully.")
                 navigate(from, { replace: true })
             })
             .catch(error => {
@@ -50,7 +55,7 @@ const Login = () => {
     const handleGitHubSignUp = () => {
         signInWithProvider(githubProvider)
             .then(result => {
-                toast.success("Account created successfully.")
+                toast.success("Log in successfully.")
                 navigate(from, { replace: true })
             })
             .catch(error => {
@@ -87,15 +92,16 @@ const Login = () => {
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
-                            <input type="email" name="email" id="email" placeholder="email" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-indigo-400" />
+                            <input type="email" name="email" id="email" placeholder="email" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-indigo-400" required/>
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between">
                                 <label htmlFor="password" className="text-sm">Password</label>
                             </div>
-                            <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-indigo-400" />
+                            <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-indigo-400" required/>
                         </div>
                     </div>
+                    <p className='text-center text-red-500'><small>{error}</small></p>
                     <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-indigo-400 dark:text-gray-900">Sign in</button>
                 </form>
             </div>
