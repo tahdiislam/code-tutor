@@ -23,6 +23,7 @@ const CourseDetails = () => {
                     
                     <p className="text-justify text-lg dark:text-gray-400">{details}</p>
                     <div className='my-7 ml-8'>
+                        <h3 className='text-2xl font-semibold mb-2'>What you will learn:</h3>
                         <ul>
                             {
                                 outline.map((m, id) => <li className='list-disc' key={id}>{m}</li>)
