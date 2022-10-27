@@ -1,10 +1,11 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
 import { FaEye, FaStar } from "react-icons/fa";
 
 const CourseDetails = () => {
     const courseInfo = useLoaderData()
-    const {title, thumbnail, details, ratings} = courseInfo;
+    const {id, title, thumbnail, details, ratings} = courseInfo;
+    const navigate = useNavigate()
     return (
         <div className='bg-gray-900 '>
             <div className="flex flex-col lg:w-1/2 p-6 space-y-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100 mx-auto">
@@ -28,7 +29,7 @@ const CourseDetails = () => {
                         </button>
                     </div>
                     <div>
-                        <button type="button" className="flex items-center px-8 py-3 font-semibold rounded bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 dark:text-gray-300">Get premium access <FaStar className='ml-2 text-yellow-600'/></button>
+                        <button onClick={() => navigate(`/get-course/${id}`)} type="button" className="flex items-center px-8 py-3 font-semibold rounded bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 dark:text-gray-300">Get premium access <FaStar className='ml-2 text-yellow-600'/></button>
                     </div>
                     <div className="flex space-x-2 text-sm dark:text-gray-400">
                         <span className='text-lg text-gray-200'>{ratings}</span>

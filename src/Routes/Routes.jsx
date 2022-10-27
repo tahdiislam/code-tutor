@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { createBrowserRouter } from "react-router-dom";
 import CourseDetails from "../Component/CourseDetails";
 import Main from "../Layout/Main";
@@ -5,6 +6,7 @@ import Courses from "../Pages/Courses";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Profile from "../Pages/Profile";
+import PurchaseCourse from "../Pages/PurchaseCourse";
 import Register from "../Pages/Register";
 import ErrorPage from "../Shared/ErrorPage";
 import PrivateRoutes from "./PrivateRoutes";
@@ -34,6 +36,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/course/:id", element: <CourseDetails/>, loader: async ({params}) => {
+                    return fetch(`http://localhost:5000/course/${params.id}`)
+                }
+            },
+            {
+                path: "/get-course/:id", element: <PrivateRoutes>
+                    <PurchaseCourse />
+                </PrivateRoutes>, loader: async ({params}) => {
                     return fetch(`http://localhost:5000/course/${params.id}`)
                 }
             }
