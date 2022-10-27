@@ -2,6 +2,7 @@ import { async } from "@firebase/util";
 import { createBrowserRouter } from "react-router-dom";
 import CourseDetails from "../Component/CourseDetails";
 import Main from "../Layout/Main";
+import Blogs from "../Pages/Blogs";
 import Courses from "../Pages/Courses";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
@@ -44,6 +45,11 @@ export const router = createBrowserRouter([
                     <PurchaseCourse />
                 </PrivateRoutes>, loader: async ({ params }) => {
                     return fetch(`https://code-tutor-server.vercel.app/course/${params.id}`)
+                }
+            },
+            {
+                path: "/blogs", element: <Blogs/>, loader: async() => {
+                    return fetch("https://code-tutor-server.vercel.app/blogs")
                 }
             }
         ]

@@ -57,12 +57,12 @@ export const Header = () => {
                         </li>
                         <li>
                             <Link
-                                to="/blog"
+                                to="/blogs"
                                 aria-label="Product pricing"
                                 title="Product pricing"
                                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                             >
-                                Blog
+                                Blogs
                             </Link>
                         </li>
                         <li>
@@ -202,12 +202,12 @@ export const Header = () => {
                                             </li>
                                             <li>
                                                 <Link
-                                                    to="/blog"
+                                                    to="/blogs"
                                                     aria-label="Product pricing"
                                                     title="Product pricing"
                                                     className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                 >
-                                                    Blog
+                                                    Blogs
                                                 </Link>
                                             </li>
                                             <li>
