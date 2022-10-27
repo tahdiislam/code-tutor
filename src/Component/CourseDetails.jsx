@@ -21,7 +21,7 @@ const CourseDetails = () => {
                 <div>
                     <img src={thumbnail} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
                     
-                    <p className="text-lg dark:text-gray-400">{details}</p>
+                    <p className="text-justify text-lg dark:text-gray-400">{details}</p>
                     <div className='my-7 ml-8'>
                         <ul>
                             {

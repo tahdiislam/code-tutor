@@ -10,7 +10,7 @@ const Course = ({course}) => {
                 <div className="p-6 space-y-2 lg:col-span-5">
                     <h3 className="text-gray-200 text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">{title}</h3>
                     <span className="text-xs dark:text-gray-400">February 19, 2021</span>
-                    <p className='dark:text-gray-400'>{details.length > 300 ? <>{details.slice(0, 300)}...<span className='text-teal-400 hover:underline'>learn more</span></> : <>{details}</>}</p>
+                    <p className='dark:text-gray-400 text-justify'>{details.length > 350 ? <>{details.slice(0, 350)}...<span className='text-teal-400 hover:underline'>learn more</span></> : <>{details}</>}</p>
                 </div>
             </Link>
         </div>
