@@ -1,6 +1,9 @@
 import React from 'react';
-import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
-import { FaEye, FaStar } from "react-icons/fa";
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { FaFileDownload, FaStar } from "react-icons/fa";
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
 
 const CourseDetails = () => {
     const courseInfo = useLoaderData()
@@ -8,8 +11,13 @@ const CourseDetails = () => {
     const navigate = useNavigate()
     return (
         <div className='bg-gray-900 '>
-            <div className="flex flex-col lg:w-1/2 p-6 space-y-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100 mx-auto">
-                <h2 className="mb-1 text-4xl font-semibold">{title}</h2>
+            <div ref={ref} className="flex flex-col lg:w-1/2 p-6 space-y-6 overflow-hidden rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-100 mx-auto">
+                <div className='flex justify-around'><h2 className="mb-1 text-4xl font-semibold">{title}</h2>
+                <div>
+                    <Pdf targetRef={ref} filename="code-example.pdf">
+                        {({ toPdf }) => <button type='button' className='flex items-center px-8 py-3 font-semibold rounded-full bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 dark:text-gray-300' onClick={toPdf}>PDF <FaFileDownload className='ml-2'/></button>}
+                    </Pdf>
+                </div></div>
                 <div>
                     <img src={thumbnail} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
                     
