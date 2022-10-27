@@ -147,7 +147,7 @@ export const Header = () => {
                         </button>
                         {isMenuOpen && (
                             <div className="absolute top-0 left-0 w-full">
-                                <div className="p-5 bg-white border rounded shadow-sm">
+                                <div className="p-5 bg-gray-900 border rounded shadow-sm">
                                     <div className="flex items-center justify-between mb-4">
                                         <div>
                                             <Link
@@ -157,7 +157,7 @@ export const Header = () => {
                                                 className="inline-flex items-center"
                                             >
                                                 <img className='h-11' src={logo} alt="" />
-                                                <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+                                                <span className="ml-2 text-xl font-bold tracking-wide text-gray-200 uppercase">
                                                     Code Tutor
                                                 </span>
                                             </Link>
@@ -185,7 +185,7 @@ export const Header = () => {
                                                     to="/"
                                                     aria-label="Our product"
                                                     title="Our product"
-                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                    className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                 >
                                                     Home
                                                 </Link>
@@ -195,7 +195,7 @@ export const Header = () => {
                                                     to="/courses"
                                                     aria-label="Our product"
                                                     title="Our product"
-                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                    className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                 >
                                                     Courses
                                                 </Link>
@@ -205,7 +205,7 @@ export const Header = () => {
                                                     to="/blogs"
                                                     aria-label="Product pricing"
                                                     title="Product pricing"
-                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                    className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                 >
                                                     Blogs
                                                 </Link>
@@ -215,21 +215,45 @@ export const Header = () => {
                                                     to="/faq"
                                                     aria-label="About us"
                                                     title="About us"
-                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                    className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                 >
                                                     FAQ
                                                 </Link>
                                             </li>
-                                            <li>
-                                                <Link
-                                                    to="/register"
-                                                    className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                                    aria-label="Sign up"
-                                                    title="Sign up"
-                                                >
-                                                    Register
-                                                </Link>
-                                            </li>
+                                            {!user?.uid ? <>
+                                                <li>
+                                                    <Link
+                                                        to="/login"
+                                                        aria-label="Sign in"
+                                                        title="Sign in"
+                                                        className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
+                                                    >
+                                                        Sign in
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link
+                                                        to="/register"
+                                                        className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                                        aria-label="Sign up"
+                                                        title="Sign up"
+                                                    >
+                                                        Register
+                                                    </Link>
+                                                </li>
+                                            </>
+                                                : <>
+                                                    <li className='flex'>
+                                                        <Link to="/profile">
+                                                            <Tippy content={user.displayName}>
+                                                                <div className="relative flex-shrink-0">
+                                                                    <span className="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900"></span>
+                                                                    <img src={user.photoURL} alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700" />
+                                                                </div>
+                                                            </Tippy>
+                                                        </Link>
+                                                    </li>
+                                                </>}
                                         </ul>
                                     </nav>
                                 </div>
