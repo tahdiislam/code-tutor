@@ -7,7 +7,7 @@ const ref = React.createRef();
 
 const CourseDetails = () => {
     const courseInfo = useLoaderData()
-    const {id, title, thumbnail, details, ratings} = courseInfo;
+    const { id, title, thumbnail, details, ratings, outline } = courseInfo;
     const navigate = useNavigate()
     return (
         <div className='bg-gray-900 '>
@@ -22,6 +22,13 @@ const CourseDetails = () => {
                     <img src={thumbnail} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" />
                     
                     <p className="text-lg dark:text-gray-400">{details}</p>
+                    <div className='my-7 ml-8'>
+                        <ul>
+                            {
+                                outline.map((m, id) => <li className='list-disc' key={id}>{m}</li>)
+                            }
+                        </ul>
+                    </div>
                 </div>
                 <div className="flex flex-wrap justify-between">
                     <div className="space-x-2">
