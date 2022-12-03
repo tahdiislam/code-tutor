@@ -3,7 +3,7 @@ Code Tutor
 See the Live Preview: [Code Tutor](https://code-tutor-255e9.web.app/)
 ------------------
 
-### Some feature of devQuiz
+### Some feature of Code Tutor
 
 <ul>
 <li>This is development course website.</li>
